@@ -23,7 +23,7 @@ def display_board(board):
 def replay():
     """Replay function
     """
-    choice = input(' Do You want to play again ? Press Y to continue, '
+    choice = input(' Do You want to play again ? Press Y to continuxe, '
                    'any other key to quit. ').upper()
     return choice == 'Y'
 
@@ -63,7 +63,7 @@ def win_check(board, mark):
             (board[3] == mark and board[5] == mark and board[7] == mark))
 
 
-# Making a choice who will h0ave the first turn
+# Making a choice who will h0ave the first TURN
 def choose_first():
     """Who will turn first"""
     flip = random.randint(0, 1)
@@ -106,68 +106,63 @@ while True:
     # Define an list for the board and fill it in with spaces
     THE_BOARD = [' '] * 10
     # Made deliberately to check if  position contains X or 0 : see below
-    THE_BOARD[0]='X'
+    THE_BOARD[0] = 'X'
     # Define the marker (or the sign) will be used by each player
     PLAYER1_MARKER, PLAYER2_MARKER = player_input()
     # Define who will have the first turn
-    turn = choose_first()
-    print(turn + ' will go first')
+    TURN = choose_first()
+    print(TURN + ' will go first ')
     # Start to play
-    play_game = input('Ready to play ? Enter y to play any other key to stop').lower()
-
-    if play_game == 'y':
-        game_on = True
-    else:
-        game_on = False
-
-    while game_on:
+    PLAY_GAME = input('Ready to play ? Enter y to play anx  y other key to stop ').lower()
+    GAME_ON = bool(PLAY_GAME in 'y')
+    while GAME_ON:
         display_board(THE_BOARD)
-        if turn == 'Player 1':
+        if TURN == 'Player 1':
             # Player 1 Turn
             display_board(THE_BOARD)
             # This position is always in X
-            position = 0
+            THE_POSITION = 0
             # If the position has already been used with X or 0 repeat assigning
-            while THE_BOARD[position] in ['X','0']:
-                position = player_choice(THE_BOARD)
+            while THE_BOARD[THE_POSITION] in ['X', '0']:
+                THE_POSITION = player_choice(THE_BOARD)
                 display_board(THE_BOARD)
-                print(f'Position {position} has alrady assigned. Select other')
-            place_marker(THE_BOARD, PLAYER1_MARKER, position)
+                print(f'Position {THE_POSITION} has already assigned. Select other : ')
+            place_marker(THE_BOARD, PLAYER1_MARKER, THE_POSITION)
             display_board(THE_BOARD)
 
             if win_check(THE_BOARD, PLAYER1_MARKER):
-                   print('Player 1 has WON !!!')
-                   game_on = False
+                print('Player 1 has WON !!!')
+                GAME_ON = False
             else:
-                  if full_board_check(THE_BOARD):
-                     print('Tie Game !')
-                     game_on = False
-                  else:
-                       turn = 'Player 2'
+                if full_board_check(THE_BOARD):
+                    print('Tie Game !')
+                    GAME_ON = False
+                else:
+                    TURN = 'Player 2'
 
         else:
             # Player2's turn.
             display_board(THE_BOARD)
             # This position is always in X
-            position = 0
+            THE_POSITION = 0
             # If the position has already been used with X or 0 repeat assigning
-            while THE_BOARD[position] in ['X', '0']:
-                 position = player_choice(THE_BOARD)
-                 display_board(THE_BOARD)
-                 print(f'Position {position} has alrady assigned. Select other')
+            while THE_BOARD[THE_POSITION] in ['X', '0']:
+                THE_POSITION = player_choice(THE_BOARD)
+                display_board(THE_BOARD)
+                print(f'Position {THE_POSITION} has already assigned. Select other : ')
 
-            place_marker(THE_BOARD, PLAYER2_MARKER, position)
+            place_marker(THE_BOARD, PLAYER2_MARKER, THE_POSITION)
             display_board(THE_BOARD)
 
             if win_check(THE_BOARD, PLAYER2_MARKER):
-                 print('Player 2 has WON !!!')
-                 game_on = False
+                print('Player 2 has WON !!!')
+                GAME_ON = False
             else:
-                 if full_board_check(THE_BOARD):
-                      print('Tie Game !')
-                      game_on = False
-                 else:
-                      turn = 'Player 1'
+                if full_board_check(THE_BOARD):
+                    print('Tie Game !')
+                    GAME_ON = False
+                else:
+                    TURN = 'Player 1'
 
 
 
